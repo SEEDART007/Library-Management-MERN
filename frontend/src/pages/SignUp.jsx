@@ -27,7 +27,7 @@ const Signup = () => {
     setSuccess("");
 
     try {
-      const res = await api.post("/register", formData);
+      await api.post("/register", formData);
       setSuccess("Signup successful! You can now login.");
       setFormData({
         name: "",
@@ -43,49 +43,79 @@ const Signup = () => {
   };
 
   return (
-    <div style={{ maxWidth: "400px", margin: "50px auto" }}>
-      <h2>Signup</h2>
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+      <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-8">
+        <h2 className="text-3xl font-semibold text-gray-800 mb-6 text-center">
+          Signup
+        </h2>
 
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      {success && <p style={{ color: "green" }}>{success}</p>}
+        {error && (
+          <p className="mb-4 text-sm text-red-600 text-center">
+            {error}
+          </p>
+        )}
 
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="name"
-          placeholder="Name"
-          value={formData.name}
-          onChange={handleChange}
-          required
-        />
+        {success && (
+          <p className="mb-4 text-sm text-green-600 text-center">
+            {success}
+          </p>
+        )}
 
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={formData.email}
-          onChange={handleChange}
-          required
-        />
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <input
+            type="text"
+            name="name"
+            placeholder="Full Name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
 
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={formData.password}
-          onChange={handleChange}
-          required
-        />
+          <input
+            type="email"
+            name="email"
+            placeholder="Email Address"
+            value={formData.email}
+            onChange={handleChange}
+            required
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
 
-        <select name="role" value={formData.role} onChange={handleChange}>
-          <option value="member">User</option>
-          <option value="librarian">Librarian</option>
-        </select>
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={formData.password}
+            onChange={handleChange}
+            required
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
 
-        <button type="submit" disabled={loading}>
-          {loading ? "Signing up..." : "Signup"}
-        </button>
-      </form>
+          <select
+            name="role"
+            value={formData.role}
+            onChange={handleChange}
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            <option value="member">User</option>
+            <option value="librarian">Librarian</option>
+          </select>
+
+          <button
+            type="submit"
+            disabled={loading}
+            className={`w-full py-2 rounded-lg font-medium transition
+              ${
+                loading
+                  ? "bg-gray-400 text-white cursor-not-allowed"
+                  : "bg-blue-600 text-white hover:bg-blue-700"
+              }`}
+          >
+            {loading ? "Signing up..." : "Signup"}
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
