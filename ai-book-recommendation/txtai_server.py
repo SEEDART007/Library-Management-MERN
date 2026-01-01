@@ -11,12 +11,18 @@ embeddings = Embeddings({
 
 # Your 10 books
 books = [
-    (0, "Atomic Habits: building good habits, discipline, self improvement"),
-    (1, "Deep Work: focus, productivity, deep concentration"),
-    (2, "Rich Dad Poor Dad: money, finance, investing"),
-    (3, "Ikigai: purpose, happiness, life balance"),
-    (4, "Clean Code: writing clean, maintainable software")
+    (0, "Clean Code: writing clean, maintainable software"),
+    (1, "Atomic Habits: building good habits, discipline, self improvement"),
+    (2, "The Pragmatic Programmer: tips for professional programming"),
+    (3, "Design Patterns: reusable solutions in software engineering"),
+    (4, "You Don't Know JS: deep dive into JavaScript"),
+    (5, "Introduction to Algorithms: fundamental algorithms and data structures"),
+    (6, "The Alchemist: inspirational fiction about following dreams"),
+    (7, "Thinking, Fast and Slow: psychology of decision making"),
+    (8, "Sapiens: history of humankind from ancient to modern times"),
+    (9, "Deep Work: focus, productivity, deep concentration")
 ]
+
 
 # Index books (ONE TIME)
 embeddings.index(books)
