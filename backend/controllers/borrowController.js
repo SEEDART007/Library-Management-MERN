@@ -98,3 +98,31 @@ exports.overdueBooks = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+exports.getAllBorrowedBooks = async (req, res) => {
+  try {
+    const borrows = await Borrow.find()
+      .populate("book", "title author isbn")
+      .populate("user", "name email role")
+      .sort({ issueDate: -1 });
+
+    const formatted = borrows.map(b => ({
+      borrowId: b._id,
+      book: b.book,
+      user: b.user,
+      issueDate: b.issueDate,
+      dueDate: b.dueDate,
+      returnDate: b.returnDate,
+      status: b.status,
+      overdue:
+        b.status === "issued" && new Date() > b.dueDate
+    }));
+
+    res.status(200).json({
+      total: formatted.length,
+      borrows: formatted
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};

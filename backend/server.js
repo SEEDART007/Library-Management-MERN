@@ -5,6 +5,7 @@ const dbConfig = require('./db/dbConfig');
 const bookRouter = require('./routes/bookRouter')
 const userRouter = require('./routes/userRouter')
 const borrowRouter = require('./routes/borrowRouter')
+const aiRouter = require('./routes/aiRouter');
 const app = express();
 
 app.use(cors())
@@ -17,9 +18,13 @@ app.use("/api/v1",userRouter)
 
 app.use("/api/v1",borrowRouter)
 
+app.use("/api/v1",aiRouter)
+
 const port = process.env.PORT || 3001
 
 app.listen(port , async()=>{ 
     await dbConfig()
     console.log(`server is listening on port ${port}`)
 })
+
+module.exports = app;

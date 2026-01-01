@@ -7,12 +7,20 @@ const {
   issueBook,
   returnBook,
   myBorrows,
-  overdueBooks
+  overdueBooks,
+  getAllBorrowedBooks
 } = require("../controllers/borrowController");
 
 router.post("/", auth, role(["member"]), issueBook);
 router.post("/return", auth, role(["member"]), returnBook);
 router.get("/my", auth, role(["member"]), myBorrows);
 router.get("/overdue", auth, role(["admin", "librarian"]), overdueBooks);
+
+router.get(
+  "/all",
+  auth,
+  role(["admin", "librarian"]),
+  getAllBorrowedBooks
+);
 
 module.exports = router;
